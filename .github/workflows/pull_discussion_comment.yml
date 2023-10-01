@@ -23,6 +23,6 @@ jobs:
       - name: Commit content
         run: |
           git add prompts/*
-          git commit -m 
+          git commit -m "modified prompt ${{github.event.discussion.node_id}}"
           git push
         
