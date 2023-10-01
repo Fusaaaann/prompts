@@ -4,6 +4,7 @@ body:
     label: Your prompt
     description: What prompt do you want to share?
     placeholder: "Example: You are an AI assistant."
+    render: txt
   validations:
     required: true
 - type: textarea
