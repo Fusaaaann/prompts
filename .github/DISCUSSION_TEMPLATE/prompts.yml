@@ -1,0 +1,19 @@
+- type: textarea
+  attributes:
+    label: Your prompt
+    description: What prompt do you want to share?
+    placeholder: "Example: You are an AI assistant."
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Description
+    description: Introduce your prompt! Please don't be shy to talk about its usage, your design decision, and impact you wish it can achieve.
+    placeholder: "Put your thought here..."
+- type: textarea
+  attributes:
+    label: Citations 
+    description: Which prompt(s) have you referred to? 
+    placeholder: Put their link here to acknowledge their kindness!
+  validations:
+    required: false
