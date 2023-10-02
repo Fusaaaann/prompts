@@ -1,4 +1,6 @@
 name: Pull Prompt from new discussion
+permissions:
+  contents: write
 on:
   discussion:
     types: [created,edited]
