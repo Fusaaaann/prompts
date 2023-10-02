@@ -1,9 +1,10 @@
 // 
 const extractPrompt = (content)=>{
 
-    const regex = /### your prompt[\s\S]*```txt\n([\s\S]*)```/i;
-    const match = content.match(regex);
-    console.error("content:",content);
+    const prompt_pattern = /### your prompt[\s\S]*```txt\n([\s\S]*)```/i;
+    const match = content.match(prompt_pattern);
+    console.error("content:");
+    console.error("%j",content);
     console.error("match:",match);
   
     if (match && match.length >= 2) {
