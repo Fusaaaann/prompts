@@ -1,7 +1,7 @@
 // 
 const extractPrompt = (content)=>{
 
-    const prompt_pattern = /### your prompt[\s\S]*```txt\n([\s\S]*)```/i;
+    const prompt_pattern = /### your prompt[\s\S]*```txt\s+([\s\S]*)```/i;
     const match = content.match(prompt_pattern);
     console.error("content:");
     console.error("%j",content);
