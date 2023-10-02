@@ -1,4 +1,4 @@
-name: Pull Prompt from new discussion
+name: Pull Prompt from Discussion Comment
 permissions:
   contents: write
 on:
@@ -32,4 +32,10 @@ jobs:
           git add prompts/*
           git commit -m "modified prompt ${DISCUSSION_NODE_ID}"
           git push
+      - name: Update Link
+        env:
+          CODE_HASH: $(git rev-parse @{push})
+          DISCUSSION_TOK: ${{ secrets.DISCUSSION_TOK }}
+        run: |
+          node scripts/updatelink.js "${BODY}" "${CODE_HASH}" "${DISCUSSION_NODE_ID}" 1
         
