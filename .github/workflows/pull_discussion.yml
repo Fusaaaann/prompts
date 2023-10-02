@@ -9,6 +9,7 @@ jobs:
   PullPrompt:
     runs-on: ubuntu-latest
     if: ${{github.event.discussion.category}} == "prompts"
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -17,14 +18,19 @@ jobs:
         run: source scripts/gitconfig.sh
       - run: mkdir -p ${PWD}/prompts          
       - name: Pull Discussion Content
+        env: 
+          BODY: ${{github.event.discussion.body}}
+          NODE_ID: ${{github.event.discussion.node_id}}
         run: |
           # Webhook events for GitHub Discussions are currently in beta and subject to change.
-          node scripts/extractprompt.js $(sed 's/"/\\"/g' <<< "${{github.event.discussion.body}}") > ${PWD}/prompts/${{github.event.discussion.node_id}}
+          node scripts/extractprompt.js $(sed 's/"/\\"/g' <<< "$BODY") > ${PWD}/prompts/${NODE_ID}
           
       - name: Commit content
+        env:
+          NODE_ID: ${{github.event.discussion.node_id}}
         run: |
           git add prompts/*
-          git commit -m "modified prompt ${{github.event.discussion.node_id}}"
+          git commit -m "modified prompt ${NODE_ID}"
           git push
 
         
