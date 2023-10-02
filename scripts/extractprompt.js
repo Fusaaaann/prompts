@@ -9,8 +9,10 @@ const extractPrompt = (content)=>{
     if (match && match.length >= 2) {
       const codeBlockContent = match[1].trim();
       console.log(codeBlockContent);
+      console.error("result:",codeBlockContent);
     } else {
       console.log(""); // Code block not found
+      console.error("prompt not found");
     }
 };
 
