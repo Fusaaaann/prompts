@@ -1,9 +1,10 @@
 // 
 const extractPrompt = (content)=>{
 
-    const regex = /### Your Prompt[\s\S]*```txt\n([\s\S]*?)```/i;
+    const regex = /### your prompt[\s\S]*```txt\n([\s\S]*?)```/i;
     const match = content.match(regex);
-    console.debug("match:",match);
+    console.error("content:",content);
+    console.error("match:",match);
   
     if (match && match.length >= 2) {
       const codeBlockContent = match[1].trim();
