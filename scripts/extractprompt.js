@@ -13,4 +13,4 @@ const extractPrompt = (content)=>{
     }
 };
 
-extractPrompt(process.argv[1])
+extractPrompt(process.argv[2])
