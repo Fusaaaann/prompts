@@ -8,23 +8,28 @@ on:
 jobs:
   PullPrompt:
     runs-on: ubuntu-latest
-    if: ${{github.event.discussion.category}} == "prompts" && ${{github.event.comment.body}} == *"#branch"*
+    env:
+      DISCUSSION_NODE_ID: ${{github.event.discussion.node_id}}
+      COMMENT_NODE_ID: ${{github.event.comment.node_id}}
+      DISCUSSION_BODY: ${{github.event.discussion.body}}
+      COMMENT_BODY: ${{github.event.comment.body}}
+    if: ${{github.event.discussion.category}} == "prompts" && ${DISCUSSION_BODY} == *"#branch"*
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           # locate branch using comment's node_id
-          ref: ${{github.event.discussion.node_id}}-${{github.event.comment.node_id}}
+          ref: ${DISCUSSION_NODE_ID}-${COMMENT_NODE_ID}
       - name: Set Up Git
         run: source scripts/gitconfig.sh
       - run: mkdir -p ${PWD}/prompts          
       - name: Pull Discussion Comment Content
         run: |
           # Webhook events for GitHub Discussions are currently in beta and subject to change.
-          node scripts/extractprompt.js ${{github.event.discussion.body}} ${{github.event.comment.body}}  | node scripts/mergeprompt.js > prompts/${{github.event.discussion.node_id}}
+          node scripts/extractprompt.js ${DISCUSSION_BODY} ${COMMENT_BODY}  | node scripts/mergeprompt.js > prompts/${DISCUSSION_NODE_ID}
       - name: Commit content
         run: |
           git add prompts/*
-          git commit -m "modified prompt ${{github.event.discussion.node_id}}"
+          git commit -m "modified prompt ${DISCUSSION_NODE_ID}"
           git push
         

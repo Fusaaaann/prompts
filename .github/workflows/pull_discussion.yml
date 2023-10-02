@@ -23,7 +23,7 @@ jobs:
           NODE_ID: ${{github.event.discussion.node_id}}
         run: |
           # Webhook events for GitHub Discussions are currently in beta and subject to change.
-          node scripts/extractprompt.js $(sed 's/"/\\"/g' <<< "$BODY") > ${PWD}/prompts/${NODE_ID}
+          node scripts/extractprompt.js "$BODY" > ${PWD}/prompts/${NODE_ID}
           
       - name: Commit content
         env:
