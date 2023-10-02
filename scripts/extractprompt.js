@@ -3,7 +3,7 @@ const extractPrompt = (content)=>{
 
     const regex = /### Your Prompt[\s\S]*```txt\n([\s\S]*?)```/i;
     const match = content.match(regex);
-    console.debug("content",content);
+    console.debug("match:",match);
   
     if (match && match.length >= 2) {
       const codeBlockContent = match[1].trim();
