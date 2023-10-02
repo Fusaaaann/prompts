@@ -15,6 +15,12 @@ jobs:
       COMMENT_BODY: ${{github.event.comment.body}}
     if: ${{github.event.discussion.category}} == "prompts" && ${DISCUSSION_BODY} == *"#branch"*
     steps:
+      - name: Checkout Base branch
+        uses: actions/checkout@v4
+      - name: Ensure new branch exists
+        run: |
+          git checkout -b ${DISCUSSION_NODE_ID}-${COMMENT_NODE_ID}
+          git push origin ${DISCUSSION_NODE_ID}-${COMMENT_NODE_ID}
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
