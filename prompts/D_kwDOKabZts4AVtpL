@@ -1,2 +1,16 @@
-content /home/runner/work/prompts/prompts/scripts/extractprompt.js
+content ### Your prompt
+
+```txt
+this prompt should be wrapped in markdown code block  
+"prompt between double quotation mark"
+```
+
+
+### Description
+
+"response between double quotation mark"
+
+### Citations
+
+_No response_
 
