@@ -1,0 +1,30 @@
+name: Pull Prompt from new discussion
+permissions:
+  contents: write
+on:
+  discussion:
+    types: [deleted]
+      
+jobs:
+  PullPrompt:
+    runs-on: ubuntu-latest
+    if: ${{github.event.discussion.category}} == "prompts"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Git
+        run: source scripts/gitconfig.sh
+      - run: mkdir -p ${PWD}/prompts          
+      - name: Pull Discussion Content
+        run: |
+          # Webhook events for GitHub Discussions are currently in beta and subject to change.
+          rm -f ${PWD}/prompts/${{github.event.discussion.node_id}}
+          
+      - name: Commit content
+        run: |
+          git add prompts/*
+          git commit -m "modified prompt ${{github.event.discussion.node_id}}"
+          git push
+
+        
