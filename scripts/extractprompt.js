@@ -1,7 +1,7 @@
 // 
 const extractPrompt = (content)=>{
 
-    const regex = /### your prompt[\s\S]*```txt\n([\s\S]*?)```/i;
+    const regex = /### your prompt[\s\S]*```txt\n([\s\S]*)```/i;
     const match = content.match(regex);
     console.error("content:",content);
     console.error("match:",match);
